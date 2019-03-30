@@ -1,6 +1,6 @@
 from threading import Thread
 import soundcard as sc
-from line import Line
+from .line import Line
 
 class Recorder:
 
