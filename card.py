@@ -9,6 +9,4 @@ class Card:
     def get_channels(self):
         return self.channels
 
-    def record(self, channels):
-
 
