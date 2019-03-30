@@ -20,7 +20,7 @@ class BatchedWav:
 
         if( ( time.time() * 1000 ) - self.start_time > (self.time_limit * 1000)): 
             self.finish_write(self.buffer)
-            self.buffer = []
+            self.buffer = None
             self.start_time = time.time() * 1000
             self.index += 1
 
