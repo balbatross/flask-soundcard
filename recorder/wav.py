@@ -7,13 +7,17 @@ class BatchedWav:
     def __init__(self, path, time_limit):
         print("new file", path)
         self.time_limit = time_limit
-        self.buffer = []
+        self.buffer = None 
         self.start_time = time.time() * 1000
         self.file = Path(path) 
         self.index = 0
 
     def write(self, data):
-        self.buffer = numpy.concatenate([data, self.buffer])
+        if(self.buffer is not None): 
+            self.buffer = numpy.concatenate([data, self.buffer])
+        else:
+            self.buffer = data
+
         if( ( time.time() * 1000 ) - self.start_time > (self.time_limit * 1000)): 
             self.finish_write(self.buffer)
             self.buffer = []
