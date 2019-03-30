@@ -20,7 +20,8 @@ class BatchedWav:
             self.index += 1
 
     def finish_write(self, data):
-        wave.write(str((self.file / '-' / str(self.index) / '.wav')), 44100, data)
+        filename = self.file + "-" + str(self.index) + ".wav"
+        wave.write(filename, 44100, data)
 
     def finish(self):
         self.file.close()
