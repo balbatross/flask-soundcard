@@ -14,5 +14,8 @@ class Batcher:
         else:
             os.mkdir(self.path / name)
 
+    def get_dir(self, name):
+        return str((self.path / name))
+
     def get_file(self, name, ix):
         return str((self.path / name / (name + "-" + str(ix) )))

@@ -10,5 +10,5 @@ class Recorder:
 
     def record(self, project_name):
         print("Recording ", project_name)
-        l = Line(project_name, self.card, [6, 7], 44100)
+        l = Line(project_name + "/line-8", self.card, [7], 44100)
         l.start()

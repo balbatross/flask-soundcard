@@ -21,4 +21,3 @@ class Line(Thread):
                 data = recorder.record(numframes=1024)
                 _file.write(data)     
         
-        _file.close()
