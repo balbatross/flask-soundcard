@@ -10,6 +10,7 @@ recorder.record('test-run')
 
 @app.route('/record')
 def record():
+    recorder.record('test-run')
     #Record channels sepcified in post
 
 @app.route('/channels')
