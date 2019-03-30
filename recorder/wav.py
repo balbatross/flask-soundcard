@@ -1,5 +1,6 @@
 import scipy.io.wavfile as wave
 from pathlib import Path
+import numpy
 import time
 
 class BatchedWav:
@@ -12,7 +13,7 @@ class BatchedWav:
         self.index = 0
 
     def write(self, data):
-        self.buffer.append(data)
+        self.buffer = numpy.concatenate([data, self.buffer])
         if( ( time.time() * 1000 ) - self.start_time > (self.time_limit * 1000)): 
             self.finish_write(self.buffer)
             self.buffer = []
