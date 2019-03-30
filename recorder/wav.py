@@ -3,9 +3,9 @@ from pathlib import Path
 import time
 
 class BatchedWav:
-    def __init__(self, path, time):
+    def __init__(self, path, time_limit):
         print("new file", path)
-        self.time_limit = time
+        self.time_limit = time_limit
         self.buffer = []
         self.start_time = time.time() * 1000
         self.file = str(Path(path)) 
