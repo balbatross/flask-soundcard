@@ -15,4 +15,4 @@ class Batcher:
             os.mkdir(self.path / name)
 
     def get_file(self, name, ix):
-        return str((self.path / name / (name + "-" + str(ix) + ".wav")))
+        return str((self.path / name / (name + "-" + str(ix) )))
