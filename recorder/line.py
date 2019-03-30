@@ -1,7 +1,7 @@
 from threading import Thread
 import wave
 from pathlib import Path
-from wav import BatchedWav
+from .wav import BatchedWav
 
 class Line(Thread):
 
