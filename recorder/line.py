@@ -16,7 +16,7 @@ class Line(Thread):
     def run(self):
         self.recording = True
         _file = BatchedWav(self.path)
-        with self.card.input.recorder(self.sample_rate, channels=self.channel) as recorder:
+        with self.card.recorder(self.sample_rate, channels=self.channel) as recorder:
             while self.recording:
                 data = recorder.record(numframes=1024)
                 _file.write(data)     
