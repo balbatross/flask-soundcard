@@ -12,7 +12,7 @@ batcher = Batcher('./garden-sessions')
 batcher.create_project("test-run")
 
 
-new_file = batcher.get_file("test-run", 0) 
+new_file = batcher.get_dir("test-run")
 recorder.record(new_file)
 
 @app.route('/status')
