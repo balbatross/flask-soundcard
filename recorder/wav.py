@@ -3,7 +3,8 @@ from pathlib import Path
 
 class BatchedWav:
     def __init__(self, path):
-        self.file = wave.open(Path(path))
+        print("new file", path)
+        self.file = wave.open(str(Path(path)))
 
     def write(self, data):
         self.file.writeframes(data)
