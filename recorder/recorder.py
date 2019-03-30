@@ -8,7 +8,8 @@ class Recorder:
         self.card = sc.get_microphone(mixer_name)
             
 
-    def record(self, project_name):
+    def record(self, project_name, channels):
         print("Recording ", project_name)
-        l = Line(project_name + "/line-8", self.card, [7], 44100)
-        l.start()
+        for idx, val in enumerate(channels):
+            l = Line(project_name + "/line-" + str(val), self.card, [val], 44100)
+            l.start()

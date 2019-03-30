@@ -9,11 +9,6 @@ mixer = Card()
 recorder = Recorder('Scarlett')
 batcher = Batcher('./garden-sessions')
 
-batcher.create_project("test-run")
-
-
-new_file = batcher.get_dir("test-run")
-recorder.record(new_file)
 
 @app.route('/status')
 def status_check():
@@ -26,7 +21,7 @@ def go_live():
 @app.route('/record')
 def record():
     batcher.create_project(request.args['name'])
-    recorder.record(batcher.get_dir(request.args['name']))
+    recorder.record(batcher.get_dir(request.args['name']), [0,1,2,3,4,5,6,7])
     #Record channels sepcified in post
 
 @app.route('/channels')
