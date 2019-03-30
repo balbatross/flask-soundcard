@@ -8,7 +8,7 @@ class BatchedWav:
         self.time_limit = time_limit
         self.buffer = []
         self.start_time = time.time() * 1000
-        self.file = str(Path(path)) 
+        self.file = Path(path) 
         self.index = 0
 
     def write(self, data):
