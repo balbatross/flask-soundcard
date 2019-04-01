@@ -13,6 +13,7 @@ batcher = Batcher('./garden-sessions')
 @app.route('/cards')
 def get_cards():
     cards = mixer.get_cards()
+    json_cards = list(map(lambda x: {'id': x['id'], 'channels': x['channels'], 'loopback': x['isloopback'], 'name': x['name']}, cards))
     return json.dumps(cards)
 
 @app.route('/cards/<card_name>/channels')
