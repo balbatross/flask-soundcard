@@ -3,7 +3,7 @@ from card import Card
 from recorder import Recorder
 from batcher import Batcher
 import json
-import * as camera from camera
+from camera import * as camera 
 from live import genHeader
 app = Flask(__name__)
 
