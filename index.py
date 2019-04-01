@@ -23,7 +23,7 @@ def get_cards():
     return json.dumps(json_cards)
 
 @app.route('/cards/<card_name>/feed')
-def get_channel_feed(card_name):
+def get_card_feed(card_name):
     def gen():
         with mixer.get_audio_context(card_name) as mic:
             CHUNK = 1024
