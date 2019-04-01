@@ -12,12 +12,13 @@ batcher = Batcher('./garden-sessions')
 
 @app.route('/cards')
 def get_cards():
-    return mixer.get_cards()
+    cards = mixer.get_cards()
+    return json.dumps(cards)
 
 @app.route('/cards/<card_name>/channels')
 def get_channels(card_name):
-    return mixer.get_channels(card_name)
-
+    channels = mixer.get_channels(card_name)
+    return json.dumps(channels)
 
 @app.route('/status')
 def status_check():
