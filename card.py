@@ -2,12 +2,13 @@ import soundcard as sc
 
 class Card:
     def __init__(self, sample_rate=44100):
-        self.input = sc.get_microphone('Scarlett')
-        self.channels = self.input.channels
-        self.recorder = self.input.recorder(sample_rate)
+        self.sample_rate = sample_rate
 
-    def get_channels(self):
-        return self.channels
+    def get_cards(self):
+        return sc.all_microphones()
+
+    def get_channels(self, name):
+        return sc.get_microphone(name).channels
 
     def get_audio(self):
         return self.recorder.record(num_frames=1024)

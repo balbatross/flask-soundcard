@@ -10,6 +10,14 @@ mixer = Card()
 recorder = Recorder('Scarlett')
 batcher = Batcher('./garden-sessions')
 
+@app.route('/cards')
+def get_cards():
+    return mixer.get_cards()
+
+@app.route('/cards/<card_name>/channels')
+def get_channels(card_name):
+    return mixer.get_channels(card_name)
+
 
 @app.route('/status')
 def status_check():
