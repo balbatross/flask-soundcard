@@ -1,7 +1,7 @@
-import cv2
+from cvideo import Video
 
 def get_camera(ix):
-    return cv2.VideoCapture(ix)
+    return Video(0).start()
 
 def get_frame(camera):
     return camera.read()
