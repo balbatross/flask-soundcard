@@ -19,7 +19,7 @@ def get_cards():
             'loopback': x.isloopback,
             'name': x.name
         }, cards))
-    return json.dumps(cards)
+    return json.dumps(json_cards)
 
 @app.route('/cards/<card_name>/channels')
 def get_channels(card_name):
