@@ -8,7 +8,7 @@ class Stream:
 
 
 # Generates the .wav file header for a given set of samples and specs
-def genHeader(self, sampleRate, bitsPerSample, channels, samples):
+def genHeader(sampleRate, bitsPerSample, channels, samples):
     datasize = len(samples) * channels * bitsPerSample // 8
     o = bytes("RIFF",'ascii')                                               # (4byte) Marks file as RIFF
     o += (datasize + 36).to_bytes(4,'little')                               # (4byte) File size in bytes excluding this and RIFF marker

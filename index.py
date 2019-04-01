@@ -26,28 +26,27 @@ def get_channels(card_name):
     channels = mixer.get_channels(card_name)
     return json.dumps(channels)
 
+@app.route('/cards/<card_name>/channels/<channel>/feed')
+def get_channel_feed(card_name, channel):
+    def gen():
+        with mixer.get_audio_context(card_name, channel) as mic:
+            CHUNK = 1024
+            sampleRate = 44100
+            bitsPerSample = 16
+            channels = 1
+            data = mixer.get_audio(mic)
+            wav_header = genHeader(sampleRate, bitsPerSample, channels, data)
+            chunk = wav_header + data
+                
+            while True:
+                yield(chunk)
+                data = mixer.get_audio(mic)
+                chunk = data
+    return Respone(stream_with_context(gen()))
+
 @app.route('/status')
 def status_check():
     return json.dumps({'status': 'OK'})
-
-@app.route('/audiofeed')
-def audiofeed():
-    mic = mixer
-    def gen():
-        CHUNK = 512
-        sampleRate = 44100
-        bitsPerSample = 16
-        channels = 2
-        wav_header = genHeader(sampleRate, bitsPerSample, channels)
-        data = mic.get_audio()
-        chunk = wav_header + data
-
-        while True:
-            yield(chunk)
-            data = mic.get_audio()
-            chunk = data
-
-    return Response(stream_with_context(gen()))
 
 @app.route('/live')
 def go_live():
