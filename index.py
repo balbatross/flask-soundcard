@@ -29,7 +29,7 @@ def get_channels(card_name):
 @app.route('/cards/<card_name>/channels/<channel>/feed')
 def get_channel_feed(card_name, channel):
     def gen():
-        with mixer.get_audio_context(card_name, channel) as mic:
+        with mixer.get_audio_context(card_name, int(channel)) as mic:
             CHUNK = 1024
             sampleRate = 44100
             bitsPerSample = 16

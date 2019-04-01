@@ -12,8 +12,8 @@ class Card:
 
     def get_audio_context(self, name, channel):
         m = sc.get_microphone(name)
-        return m.recorder(sample_rate=self.sample_rate, channels=[channel])
+        return m.recorder(samplerate=self.sample_rate, channels=[channel])
 
     def get_audio(self, mic):
-        return bytes(mic.record(num_frames=1024))
+        return bytes(mic.record(numframes=1024))
 
