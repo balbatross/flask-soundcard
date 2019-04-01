@@ -52,8 +52,5 @@ def record():
     recorder.record(batcher.get_dir(request.args['name']), [0,1,2,3,4,5,6,7])
     #Record channels sepcified in post
 
-@app.route('/channels')
-def get_channels():
-    return mixer.get_channels()
 
 
