@@ -19,7 +19,26 @@ def get_cards():
             'loopback': x.isloopback,
             'name': x.name
         }, cards))
+
     return json.dumps(json_cards)
+
+@app.route('/cards/<card_name>/feed')
+def get_channel_feed(card_name):
+    def gen():
+        with mixer.get_audio_context(card_name) as mic:
+            CHUNK = 1024
+            sampleRate = 44100
+            bitsPerSample = 16
+            channels = 1
+            data = mixer.get_audio(mic)
+            wav_header = genHeader(sampleRate, bitsPerSample, channels, data)
+            chunk = wav_header + data
+                
+            while True:
+                yield(chunk)
+                data = mixer.get_audio(mic)
+                chunk = data
+    return Response(stream_with_context(gen()))
 
 @app.route('/cards/<card_name>/channels')
 def get_channels(card_name):
@@ -29,7 +48,7 @@ def get_channels(card_name):
 @app.route('/cards/<card_name>/channels/<channel>/feed')
 def get_channel_feed(card_name, channel):
     def gen():
-        with mixer.get_audio_context(card_name, int(channel)) as mic:
+        with mixer.get_audio_context(card_name, [int(channel)]) as mic:
             CHUNK = 1024
             sampleRate = 44100
             bitsPerSample = 16
