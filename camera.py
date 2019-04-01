@@ -8,5 +8,4 @@ def get_frame(camera):
 
 def fmt_frame(frame):
     enc = cv2.imencode('jpg', frame)
-    return b'--frame\r\n'
-            b'Content-Type: image/jpeg\r\n\r\n' + enc + b'\r\n'
+    return b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + enc + b'\r\n'
