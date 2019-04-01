@@ -1,8 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, stream_with_context, Response
 from card import Card
 from recorder import Recorder
 from batcher import Batcher
 import json
+from live import genHeader
 app = Flask(__name__)
 
 mixer = Card()
@@ -13,6 +14,25 @@ batcher = Batcher('./garden-sessions')
 @app.route('/status')
 def status_check():
     return json.dumps({'status': 'OK'})
+
+@app.route('/audiofeed')
+def audiofeed():
+    mic = mixer
+    def gen():
+        CHUNK = 512
+        sampleRate = 44100
+        bitsPerSample = 16
+        channels = 2
+        wav_header = genHeader(sampleRate, bitsPerSample, channels)
+        data = mic.get_audio()
+        chunk = wav_header + data
+
+        while True:
+            yield(chunk)
+            data = mic.get_audio()
+            chunk = data
+
+    return Response(stream_with_context(gen()))
 
 @app.route('/live')
 def go_live():

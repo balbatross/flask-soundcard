@@ -9,4 +9,6 @@ class Card:
     def get_channels(self):
         return self.channels
 
+    def get_audio(self):
+        return self.recorder.record(num_frames=1024)
 
