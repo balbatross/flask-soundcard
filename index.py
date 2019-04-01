@@ -42,7 +42,7 @@ def get_channel_feed(card_name, channel):
                 yield(chunk)
                 data = mixer.get_audio(mic)
                 chunk = data
-    return Respone(stream_with_context(gen()))
+    return Response(stream_with_context(gen()))
 
 @app.route('/status')
 def status_check():
