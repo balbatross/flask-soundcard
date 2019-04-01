@@ -3,12 +3,23 @@ from card import Card
 from recorder import Recorder
 from batcher import Batcher
 import json
+import * as camera from camera
 from live import genHeader
 app = Flask(__name__)
 
+_cam = camera.get_camera(0)
 mixer = Card()
 recorder = Recorder('Scarlett')
 batcher = Batcher('./garden-sessions')
+
+@app.route('/camera/feed')
+def get_camera():
+    def gen():
+        while True:
+            f = camera.get_frame(_cam)
+            r = camera.fmt_frame(_cam)
+            yield(r)
+    return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/cards')
 def get_cards():
